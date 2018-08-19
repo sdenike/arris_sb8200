@@ -6,4 +6,4 @@ This is a crude, get it to work script which I plan on improving on as time allo
 
 # Screenshot
 
-![Arris SB8200 Screenshot](https://github.com/sdenike/arris_sb8200/tree/master/assets/img/Screenshot.png?raw=true "Arris SB8200 Screenshot")
+![Arris SB8200 Screenshot](https://github.com/sdenike/arris_sb8200/blob/master/assets/img/Screenshot.png "Arris SB8200 Screenshot")
