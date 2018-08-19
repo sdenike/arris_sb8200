@@ -1,0 +1,13 @@
+#!/bin/bash
+
+# Downstream
+/usr/bin/lynx -dump http://192.168.100.1/cmconnectionstatus.html|awk 'NR >= 21 && NR <= 52'|sort -nk1|while read channel lock_status modulation frequency hz power power1 snr_mer db corrected uncorrectables;
+do
+	/usr/bin/mysql -umodem -pmodem -h10.0.1.10 --database=modem -e "INSERT INTO downstream (datetime,channel,lock_status,modulation,frequency,power,snr_mer,corrected,uncorrectables) values (NOW(), '$channel','$lock_status','$modulation','$frequency','$power','$snr_mer','$corrected','$uncorrectables');"
+done
+
+# Upstream
+/usr/bin/lynx -dump http://192.168.100.1/cmconnectionstatus.html|awk 'NR >= 56 && NR <= 58'|sort -nk1|while read channel channelid lock_status us_channel_type frequency freq_hz width width_hz power power1;
+do
+        /usr/bin/mysql -umodem -pmodem -h10.0.1.10 --database=modem -e "INSERT INTO upstream (datetime,channel,channelid,lock_status,us_channel_type,frequency,width,power) values (NOW(), '$channel','$channelid','$lock_status','$us_channel_type','$frequency','$width','$power');"
+done
